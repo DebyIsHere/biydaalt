@@ -1,17 +1,13 @@
-# JetBrains IDE файлууд
 .idea/
 *.iws
 *.iml
 *.ipr
 
-# Том архив файлууд
 *.tar.gz
 *.zip
 *.rar
 
-# Түр зуурын файлууд
 *.tmp
 *.temp
 
-# ODG файлууд (хэрэгтэй бол устгана)
 # BiyDaalt.odt

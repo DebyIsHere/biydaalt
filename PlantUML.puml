@@ -1,0 +1,113 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam shadowing false
+skinparam monochrome true
+
+class Parking {
+    - MAX_CAPACITY : int = 10
+    - garage : Stack<String>
+    - inputLines : List<String>
+    - outputLines : List<String>
+    + main(args: String[]) : void
+    + input() : void
+    + process() : void
+    + output() : void
+    - handleArrival(licensePlate: String) : void
+    - handleDeparture(licensePlate: String) : void
+    + getGarageSize() : int
+    + setInputLines(inputLines: List<String>) : void
+    + getOutputLines() : List<String>
+}
+
+class Car {
+    - licensePlate : String
+    - action : String
+    + Car(action: String, licensePlate: String)
+    + getLicensePlate() : String
+    + getAction() : String
+    + toString() : String
+    + equals(obj: Object) : boolean
+    + hashCode() : int
+}
+
+class Garage {
+    - MAX_CAPACITY : int = 10
+    - garageStack : Stack<Car>
+    + Garage()
+    + addCar(car: Car) : boolean
+    + removeCar(licensePlate: String) : CarRemoveResult
+    + containsCar(licensePlate: String) : boolean
+    + getCurrentSize() : int
+    + getMaxCapacity() : int
+    + isFull() : boolean
+    + isEmpty() : boolean
+    + getGarageStatus() : List<String>
+}
+
+class CarRemoveResult {
+    - found : boolean
+    - movedCars : int
+    - removedCar : Car
+    + CarRemoveResult(found: boolean, movedCars: int, removedCar: Car)
+    + isFound() : boolean
+    + getMovedCars() : int
+    + getRemovedCar() : Car
+}
+
+class FileHandler {
+    + readFromFile(filename: String) : List<Car>
+    + writeToFile(filename: String, outputLines: List<String>) : void
+}
+
+class ParkingManager {
+    - garage : Garage
+    - outputLines : List<String>
+    + ParkingManager()
+    + processCars(cars: List<Car>) : void
+    + getOutputLines() : List<String>
+    + getGarage() : Garage
+    + printGarageStatus() : void
+    - handleArrival(car: Car) : void
+    - handleDeparture(departingCar: Car) : void
+}
+
+' Relationships
+Parking --> FileHandler
+Parking --> ParkingManager
+ParkingManager --> Garage
+Garage --> Car
+Garage --> CarRemoveResult
+FileHandler --> Car
+
+' Collections
+Parking --> Stack
+Parking --> List
+Garage --> Stack
+ParkingManager --> List
+
+note top of Parking
+<b>Main Class</b>
+Програмын гол класс
+Файл унших, боловсруулах,
+гаргалт хэвлэх үүрэгтэй
+end note
+
+note right of Garage
+<b>Зогсоолын логик</b>
+Машин нэмэх, хасах
+стек үйлдлүүдийг гүйцэтгэнэ
+end note
+
+note left of FileHandler
+<b>Файл боловсруулалт</b>
+cars.txt файлаас унших
+output.txt файлд бичих
+end note
+
+note bottom of ParkingManager
+<b>Үйлдлийн менежер</b>
+Машины ирэх, гарах
+үйлдлүүдийг зохицуулна
+end note
+@enduml

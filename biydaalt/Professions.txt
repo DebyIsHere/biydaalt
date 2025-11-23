@@ -1,0 +1,8 @@
+CS/Computer Science
+MA/Mathematics
+PH/Physics
+CH/Chemistry
+EN/English
+HI/History
+BI/Biology
+EC/Economics
